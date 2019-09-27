@@ -37,8 +37,7 @@ app.post('/api/articles', function(req, res) {
 	});
 	
 	article.save(function (err) {
-		if (!err) 
-{
+		if (!err) {
 			log.info("article created");
 			return res.send({
 				status: 'OK',
@@ -90,14 +89,14 @@ app.put('/api/articles/:id', function (req, res){
 				log.info("article updated");
 				return res.send({ status: 'OK', article:article });
 			} else { 
-				if(err.name == 'ValidationError') {
-					res.statusCode = 400;
-					res.send({ error: 'Validation error' });
-				} else {
-					res.statusCode = 500;
-					res.send({ error: 'Server error' });
-				}
-				log.error('Internal error(' + res.statusCode + '): ' + err.message);
+			if(err.name == 'ValidationError') {
+				res.statusCode = 400;
+				res.send({ error: 'Validation error' });
+			} else {
+				res.statusCode = 500;
+				res.send({ error: 'Server error' });
+			}
+			  	log.error('Internal error(' + res.statusCode + '): ' + err.message);
 			}
 		});
 	});
